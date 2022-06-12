@@ -69,7 +69,13 @@ class Map
   end
 
   def set(key, value)
-    @pairs << [key, value]
+    @pairs.each.with_index do |sub_arr, idx|
+      if sub_arr[0] == key
+          @pairs[idx][1] = value
+      end
+    end
+      @pairs << [key, value]
+    
   end
 
   def get(key)
@@ -88,8 +94,9 @@ end
 
 a = Map.new
 p a.set("hello", "world")
-p a.set("RJ", "chimmy")
+p a.set("hello", "earth")
+p a.set("bye", "world")
 p a.pairs
-p a.get("RJ")
-p a.delete("RJ")
+p a.get("hello")
+p a.delete("bye")
 p a.show
