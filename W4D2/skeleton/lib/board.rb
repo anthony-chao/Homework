@@ -43,16 +43,16 @@ class Board
       i += 1
     end
 
+    render
     next_turn(ending_idx)
 
-    render
   end
 
   def next_turn(ending_cup_idx)
     # helper method to determine whether #make_move returns :switch, :prompt, or ending_cup_idx
       if ending_cup_idx == 6 || ending_cup_idx == 13
         :prompt
-      elsif @cups[ending_cup_idx].empty?
+      elsif @cups[ending_cup_idx].length == 1   #I don't get why it's equal to 1? Why doesn't .empty? work?
         :switch
       else
         return ending_cup_idx
@@ -68,8 +68,18 @@ class Board
   end
 
   def one_side_empty?
+    if @cups[0...6].all? { |ele| ele.empty? } || @cups[7...13].all? { |ele| ele.empty?  }
+      return true
+    # elsif !@cups[6].empty? && !@cups[13].empty?
+    #   return false
+    else
+      return false
+    end
+
   end
 
   def winner
+
+
   end
 end
